@@ -5,16 +5,10 @@ This is a Python implementation of the paper:
 
 ## Datasets
 
-The 6 datasets used in GABoost are contained in the `./dataset/` folder. 
-
-- Douban, Movie and Megadiff changes are three datasets for the effectiveness experiments of GABoost. 
+- The datasets Douban, Movie and Megadiff changes used in GABoost are contained in the `./dataset/` folder. 
 
   Each of the Douban and Movie dataset contains a pair of heterogeneous graphs G0 and G1 as well as their ground-truth alignment.
-  Megadiff changes dataset contains 10 pairs of graphs and their ground-truth alignments.
-
-- Email-uni, Facebook, and DBLP are three datasets for the robustness experiments.
-
-  Each of the datasets contains a real-world graph; based on it, we generate a set of graph pairs with different noise levels and numbers of vertex/edge types.
+  Megadiff changes dataset contains 4 folders. Each folder contains 10 pairs of graphs and their ground-truth alignments. 
 
 - The file structure is as follows:
   ~~~
@@ -34,6 +28,12 @@ The 6 datasets used in GABoost are contained in the `./dataset/` folder.
    
   
 ## Dependencies
+
+- python 3.9
+- networkx 2.8.8
+- numpy 1.23.4
+- pyparsing 3.0.9
+- scipy 1.9.3
 
 ## Run
 
@@ -57,9 +57,14 @@ The code can be run in three mode:
  
   - input_g1_edge: The path of edge file of the graph G1.
 
-  - output_alignment: Output alignment save path. If None, output alignment result is not saved.
+  - save_output_alignment: Output alignment save path. If None, output alignment result is not saved.
 
   - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
+ 
+  For example:
+  ~~~
+  python runGABoost.py --mode GABoost --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --input_initial_alignment ./dataset/movie/scmn_output_alignment --ground_truth_alignment ./dataset/movie/true_matching --save_output_alignment ./dataset/movie/gaboost_output_alignment
+  ~~~
 
 - **Mode2 SCMN**: This mode refers to the SCMN graph alignment method described in the Section V.A of our paper.
 
@@ -75,10 +80,14 @@ The code can be run in three mode:
  
   - input_g1_edge: The path of edge file of the graph G1.
 
-  - output_alignment: Output alignment save path. If None, output alignment result is not saved.
+  - save_output_alignment: Output alignment save path. If None, output alignment result is not saved.
 
   - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
-
+  For example:
+  ~~~
+  python runGABoost.py --mode SCMN --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --ground_truth_alignment ./dataset/movie/true_matching --save_output_alignment ./dataset/movie/scmn_output_alignment
+  ~~~
+  
 - **Mode3 SCMN+GABoost**: This mode refers to the combination of SCMN method and GABoost (GAB(SCMN)).
 
   In this mode, our code takes two graphs G0 and G1 as input, and then obtain an alignment based on SCMN, which is used as the initial alignment for GABoost. After that, our code outputs a GABoost-ed alignment of the SCMN alignment result.
@@ -93,7 +102,11 @@ The code can be run in three mode:
  
   - input_g1_edge: The path of edge file of the graph G1.
 
-  - output_alignment: Output alignment save path. If None, output alignment result is not saved.
+  - save_output_alignment: Output alignment save path. If None, output alignment result is not saved.
 
   - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
-   
+
+  For example:
+  ~~~
+  python runGABoost.py --mode SCMN+GABoost --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --ground_truth_alignment ./dataset/movie/true_matching --save_output_alignment ./dataset/movie/scmn_gaboost_output_alignment
+  ~~~
