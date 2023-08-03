@@ -43,16 +43,57 @@ The GABoost code can be run in three mode:
 
   It inputs an initial alignment between graphs G0 and G1, and outputs a boosted one.
 
-  The input initial alignment file should contains multiple lines. Each line represents an aligned node pair. The format is  `node_id1  node_id2`, and the seperator between `node_id1` and `node_id2` is `\t`.
+  In this mode, there are 7 input arguments:
 
-  It should be noticed that the node id in initial alignment file should be consistent with the node id in the input graphs.
+  - input_initial_alignment: The path of input initial alignment file. The input initial alignment file should contains multiple lines. Each line represents an aligned node pair. The format is  `node_id1  node_id2`, and the seperator between `node_id1` and `node_id2` is `\t`.
+
+    It should be noticed that the node id in initial alignment file should be consistent with the node id in the input graphs.
+
+  - input_g0_node: The path of node file of the graph G0.
+ 
+  - input_g0_edge: The path of edge file of the graph G0.
+ 
+  - input_g1_node: The path of node file of the graph G1.
+ 
+  - input_g1_edge: The path of edge file of the graph G1.
+
+  - output_alignment: Output alignment save path. If None, output alignment result is not saved.
+
+  - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
 
 - **Mode2 SCMN**: This mode refers to the SCMN graph alignment method described in the Section V.A of our paper.
 
   It inputs two graphs G0 and G1, and outputs an alignment between them based on node's 1-hop information.
 
+  In this mode, there are 6 input arguments:
+
+  - input_g0_node: The path of node file of the graph G0.
+ 
+  - input_g0_edge: The path of edge file of the graph G0.
+ 
+  - input_g1_node: The path of node file of the graph G1.
+ 
+  - input_g1_edge: The path of edge file of the graph G1.
+
+  - output_alignment: Output alignment save path. If None, output alignment result is not saved.
+
+  - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
+
 - **Mode3 SCMN+BOOST**: This mode refers to the combination of SCMN method and GABoost (GAB(SCMN)).
 
   In this mode, our code takes two graphs G0 and G1 as input, and then obtain an alignment based on SCMN, which is used as the initial alignment for GABoost. After that, our code outputs a GABoost-ed alignment of the SCMN alignment result.
 
+  In this mode, there are 6 input arguments:
+
+  - input_g0_node: The path of node file of the graph G0.
+ 
+  - input_g0_edge: The path of edge file of the graph G0.
+ 
+  - input_g1_node: The path of node file of the graph G1.
+ 
+  - input_g1_edge: The path of edge file of the graph G1.
+
+  - output_alignment: Output alignment save path. If None, output alignment result is not saved.
+
+  - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
    
