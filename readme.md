@@ -36,3 +36,23 @@ The 6 datasets used in GABoost are contained in the `./dataset/` folder.
 ## Dependencies
 
 ## Run
+
+The GABoost code can be run in three mode:
+
+- **Mode1 BOOST**: This mode refers to the GABoost algorithm in our paper, which is detailed in Algorithm 1.
+
+  It inputs an initial alignment between graphs G0 and G1, and outputs a boosted one.
+
+  The input initial alignment file should contains multiple lines. Each line represents an aligned node pair. The format is  `node_id1  node_id2`, and the seperator between `node_id1` and `node_id2` is `\t`.
+
+  It should be noticed that the node id in initial alignment file should be consistent with the node id in the input graphs.
+
+- **Mode2 SCMN**: This mode refers to the SCMN graph alignment method described in the Section V.A of our paper.
+
+  It inputs two graphs G0 and G1, and outputs an alignment between them based on node's 1-hop information.
+
+- **Mode3 SCMN+BOOST**: This mode refers to the combination of SCMN method and GABoost (GAB(SCMN)).
+
+  In this mode, our code takes two graphs G0 and G1 as input, and then obtain an alignment based on SCMN, which is used as the initial alignment for GABoost. After that, our code outputs a GABoost-ed alignment of the SCMN alignment result.
+
+   
