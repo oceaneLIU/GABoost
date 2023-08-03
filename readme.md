@@ -45,7 +45,7 @@ The code can be run in three mode:
 
   In this mode, there are 7 input arguments:
 
-  - input_initial_alignment: The path of input initial alignment file. The input initial alignment file should contains multiple lines. Each line represents an aligned node pair. The format is  `node_id1  node_id2`, and the seperator between `node_id1` and `node_id2` is `\t`.
+  - input_initial_alignment: The path of input initial alignment file. The input initial alignment file should contains multiple lines. Each line represents an aligned node pair. The format is `node_id1  node_id2`, the seperator between `node_id1` and `node_id2` is `\t`.
 
     It should be noticed that the node id in initial alignment file should be consistent with the node id in the input graphs.
 
