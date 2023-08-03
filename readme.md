@@ -37,9 +37,9 @@ The 6 datasets used in GABoost are contained in the `./dataset/` folder.
 
 ## Run
 
-The GABoost code can be run in three mode:
+The code can be run in three mode:
 
-- **Mode1 BOOST**: This mode refers to the GABoost algorithm in our paper, which is detailed in Algorithm 1.
+- **Mode1 GABoost**: This mode refers to the GABoost algorithm in our paper, which is detailed in Algorithm 1.
 
   It inputs an initial alignment between graphs G0 and G1, and outputs a boosted one.
 
@@ -79,7 +79,7 @@ The GABoost code can be run in three mode:
 
   - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
 
-- **Mode3 SCMN+BOOST**: This mode refers to the combination of SCMN method and GABoost (GAB(SCMN)).
+- **Mode3 SCMN+GABoost**: This mode refers to the combination of SCMN method and GABoost (GAB(SCMN)).
 
   In this mode, our code takes two graphs G0 and G1 as input, and then obtain an alignment based on SCMN, which is used as the initial alignment for GABoost. After that, our code outputs a GABoost-ed alignment of the SCMN alignment result.
 
