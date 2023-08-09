@@ -25,30 +25,17 @@ This is a Python implementation of the paper:
   appears twice in the file, `node_id1  node_id2  edge_type` and `node_id2  node_id1  edge_type` respectively.
   Each line in true_matching file represents a ground-truth alignment node pair. The format is `node_id1  node_id2`.
 
-   
-  
-## Dependencies
-
-- python 3.9
-- networkx 2.8.8
-- numpy 1.23.4
-- pyparsing 3.0.9
-- scipy 1.9.3
 
 ## Run
+Currently, we provide an executable binary version of GABoost. The source code of GABoost will be available after the review process.
 
-The code can be run in three mode:
+There are 8 input arguments for GABoost:
 
-- **Mode1 GABoost**: This mode refers to the GABoost algorithm in our paper, which is detailed in Algorithm 1.
-
-  It inputs an initial alignment between graphs G0 and G1, and outputs a boosted one.
-
-  In this mode, there are 7 input arguments:
-
-  - input_initial_alignment: The path of input initial alignment file. The input initial alignment file should contains multiple lines. Each line represents an aligned node pair. The format is `node_id1  node_id2`, the seperator between `node_id1` and `node_id2` is `\t`.
-
-    It should be noticed that the node id in initial alignment file should be consistent with the node id in the input graphs.
-
+  - mode: The code can be run in three mode: `SCMN`, `GABoost`, and `SCMN+GABoost`.
+    - `SCMN`: The SCMN graph alignment method described in the Section V.A of our paper.
+    - `GABoost`: The GABoost algorithm in our paper, which is detailed in Algorithm 1.
+    - `SCMN+GABoost`: The combination of SCMN method and GABoost (GAB(SCMN)).
+      
   - input_g0_node: The path of node file of the graph G0.
  
   - input_g0_edge: The path of edge file of the graph G0.
@@ -57,56 +44,44 @@ The code can be run in three mode:
  
   - input_g1_edge: The path of edge file of the graph G1.
 
-  - save_output_alignment: Output alignment save path. If None, output alignment result is not saved.
+  - input_initial_alignment:  The path of input initial alignment file. Only required for `GABoost` mode. For `SCMN` and `SCMN+GABoost` mode, this argument should be set to None. The input initial alignment file should contains multiple lines. Each line represents an aligned node pair. The format is `node_id1  node_id2`, the seperator between `node_id1` and `node_id2` is `\t`.
 
-  - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
- 
-  For example:
-  ~~~
-  python runGABoost.py --mode GABoost --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --input_initial_alignment ./dataset/movie/scmn_output_alignment --ground_truth_alignment ./dataset/movie/true_matching --save_output_alignment ./dataset/movie/gaboost_output_alignment
-  ~~~
-
-- **Mode2 SCMN**: This mode refers to the SCMN graph alignment method described in the Section V.A of our paper.
-
-  It inputs two graphs G0 and G1, and outputs an alignment between them based on node's 1-hop information.
-
-  In this mode, there are 6 input arguments:
-
-  - input_g0_node: The path of node file of the graph G0.
- 
-  - input_g0_edge: The path of edge file of the graph G0.
- 
-  - input_g1_node: The path of node file of the graph G1.
- 
-  - input_g1_edge: The path of edge file of the graph G1.
+  - ground_truth_alignment: Ground-truth alignment file path. If it is None, the alignment accuracy (ACC) can not be computed.
 
   - save_output_alignment: Output alignment save path. If None, output alignment result is not saved.
 
-  - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
-  For example:
+### Running example in `SCMN` mode
+
+- On douban dataset
   ~~~
-  python runGABoost.py --mode SCMN --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --ground_truth_alignment ./dataset/movie/true_matching --save_output_alignment ./dataset/movie/scmn_output_alignment
+  ./runGABoost SCMN ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn_output_alignment
   ~~~
   
-- **Mode3 SCMN+GABoost**: This mode refers to the combination of SCMN method and GABoost (GAB(SCMN)).
-
-  In this mode, our code takes two graphs G0 and G1 as input, and then obtain an alignment based on SCMN, which is used as the initial alignment for GABoost. After that, our code outputs a GABoost-ed alignment of the SCMN alignment result.
-
-  In this mode, there are 6 input arguments:
-
-  - input_g0_node: The path of node file of the graph G0.
- 
-  - input_g0_edge: The path of edge file of the graph G0.
- 
-  - input_g1_node: The path of node file of the graph G1.
- 
-  - input_g1_edge: The path of edge file of the graph G1.
-
-  - save_output_alignment: Output alignment save path. If None, output alignment result is not saved.
-
-  - ground_truth_alignment: Ground-truth alignment file path. If it is None, the metrics accuracy (ACC), mean average precision (MAP), edge correctness (EC) and induced conserved structure (ICS) will not be computed.
-
-  For example:
+- On movie dataset
   ~~~
-  python runGABoost.py --mode SCMN+GABoost --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --ground_truth_alignment ./dataset/movie/true_matching --save_output_alignment ./dataset/movie/scmn_gaboost_output_alignment
+  ./runGABoost SCMN ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn_output_alignment
+  ~~~
+
+### Running example in `GABoost` mode
+
+- On douban dataset
+  ~~~
+  ./runGABoost GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file ./dataset/douban/scmn_output_alignment ./dataset/douban/true_matching ./dataset/douban/gaboost_output_alignment
+  ~~~
+  
+- On movie dataset
+  ~~~
+  ./runGABoost GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file ./dataset/movie/scmn_output_alignment ./dataset/movie/true_matching ./dataset/movie/gaboost_output_alignment
+  ~~~
+
+### Running example in `SCMN+GABoost` mode
+
+- On douban dataset
+  ~~~
+  ./runGABoost SCMN+GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn+gaboost_output_alignment
+  ~~~
+  
+- On movie dataset
+  ~~~
+  ./runGABoost SCMN+GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn+gaboost_output_alignment
   ~~~
