@@ -27,7 +27,7 @@ This is a Python implementation of the paper:
 
 
 ## Run
-Currently, we provide an executable binary version of GABoost. The source code of GABoost will be available after the review process.
+Currently, we provide two executable binary version `runGABoost_mac` and `runGABoost_win.exe` of GABoost for Mac and Windows, respectively. The source code of GABoost will be available after the review process.
 
 There are 8 input arguments for GABoost:
 
@@ -53,35 +53,75 @@ There are 8 input arguments for GABoost:
 ### Running example in `SCMN` mode
 
 - On douban dataset
-  ~~~
-  ./runGABoost SCMN ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn_output_alignment
-  ~~~
   
-- On movie dataset
+  Mac
   ~~~
-  ./runGABoost SCMN ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn_output_alignment
+  ./runGABoost_mac SCMN ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn_output_alignment
+  ~~~
+
+  Windows
+  ~~~
+  runGABoost_win SCMN ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn_output_alignment
+  ~~~
+- On movie dataset
+  
+  Mac
+  ~~~
+  ./runGABoost_mac SCMN ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn_output_alignment
+  ~~~
+
+  Windows
+  ~~~
+  runGABoost_win SCMN ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn_output_alignment
   ~~~
 
 ### Running example in `GABoost` mode
 
 - On douban dataset
-  ~~~
-  ./runGABoost GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file ./dataset/douban/scmn_output_alignment ./dataset/douban/true_matching ./dataset/douban/gaboost_output_alignment
-  ~~~
   
-- On movie dataset
+  Mac
   ~~~
-  ./runGABoost GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file ./dataset/movie/scmn_output_alignment ./dataset/movie/true_matching ./dataset/movie/gaboost_output_alignment
+  ./runGABoost_mac GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file ./dataset/douban/scmn_output_alignment ./dataset/douban/true_matching ./dataset/douban/gaboost_output_alignment
+  ~~~
+
+  Windows
+  ~~~
+  runGABoost_win GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file ./dataset/douban/scmn_output_alignment ./dataset/douban/true_matching ./dataset/douban/gaboost_output_alignment
+  ~~~
+- On movie dataset
+  
+  Mac
+  ~~~
+  ./runGABoost_mac GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file ./dataset/movie/scmn_output_alignment ./dataset/movie/true_matching ./dataset/movie/gaboost_output_alignment
+  ~~~
+
+  Windows
+  ~~~
+  runGABoost_win GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file ./dataset/movie/scmn_output_alignment ./dataset/movie/true_matching ./dataset/movie/gaboost_output_alignment
   ~~~
 
 ### Running example in `SCMN+GABoost` mode
 
 - On douban dataset
+  
+  Mac
   ~~~
-  ./runGABoost SCMN+GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn+gaboost_output_alignment
+  ./runGABoost_mac SCMN+GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn+gaboost_output_alignment
+  ~~~
+
+  Windows
+  ~~~
+  runGABoost_win SCMN+GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn+gaboost_output_alignment
   ~~~
   
 - On movie dataset
+  
+  Mac
   ~~~
-  ./runGABoost SCMN+GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn+gaboost_output_alignment
+  ./runGABoost_mac SCMN+GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn+gaboost_output_alignment
+  ~~~
+
+  Windows
+  ~~~
+  runGABoost_win SCMN+GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn+gaboost_output_alignment
   ~~~
