@@ -103,22 +103,13 @@ class SCMN:
         node1_encoded_sliced.append(node1_encoded[(n_per_thread-1)*n_per_thread:])
 
         self.cost_matrix[t] = np.zeros((len(node1_encoded), len(node2_encoded)))
-        for n in node1_encoded_sliced:
-            for i in n:
-                original_node1 = node_bipartite_decoder_graph1[i]
-                ctx1 = node_context1[original_node1]
-                for j in node2_encoded:
-                    original_node2 = node_bipartite_decoder_graph2[j]
-                    ctx2 = node_context2[original_node2]
-                    dis = static_commonality(ctx1, ctx2)
-                    self.cost_matrix[t][i][j] = dis
-        #thread_list = [threading.Thread(target=self.get_distance_mp_static, args=(t, n, node2_encoded,
-        #                                                       node_bipartite_decoder_graph1, node_bipartite_decoder_graph2,
-        #                                                       node_context1, node_context2, )) for n in node1_encoded_sliced]
-        #for thread in thread_list:
-        #    thread.start()
-        #for thread in thread_list:
-        #    thread.join()
+        thread_list = [threading.Thread(target=self.get_distance_mp_static, args=(t, n, node2_encoded,
+                                                               node_bipartite_decoder_graph1, node_bipartite_decoder_graph2,
+                                                               node_context1, node_context2, )) for n in node1_encoded_sliced]
+        for thread in thread_list:
+            thread.start()
+        for thread in thread_list:
+            thread.join()
         row_ind, col_ind = linear_sum_assignment(self.cost_matrix[t])
         for i in range(0, len(row_ind)):
             v = row_ind[i]
