@@ -1,7 +1,7 @@
 # GABoost
 
 This is a Python implementation of the paper:
-> GABoost Is You All Need: Graph Alignment Boosting via Local Optimum Escape
+> GABoost: Graph Alignment Boosting via Local Optimum Escape
 
 ## Datasets
 
@@ -27,8 +27,7 @@ This is a Python implementation of the paper:
 
 
 ## Run
-Currently, we provide two executable binary version `runGABoost_mac` and `runGABoost_win.exe` of GABoost for Mac and Windows, respectively. The source code of GABoost will be available after the review process.
-
+Currently, we provide two executable binary version `runGABoost_mac` and `runGABoost_win.exe` of GABoost for Mac and Windows, respectively. 
 There are 8 input arguments for GABoost:
 
   - mode: The code can be run in three mode: `SCMN`, `GABoost`, and `SCMN+GABoost`.
