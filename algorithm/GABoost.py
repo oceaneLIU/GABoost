@@ -171,7 +171,7 @@ class GABoost:
         print('Iteration\t%d\truntime\t%.4f\tdcmn\t%d' % (iteration, end - start, -sum_cost))
 
         while iteration == 1 or prev_cost != sum_cost:
-            start = time.process_time()
+            start = time.time()
             with mp.Pool(2) as pool:
                 results_ctx = pool.starmap(partial(self.dynamic_vertex_context, matching=matching),
                                            [(self.graph1, 'left'), (self.graph2, 'right')])
@@ -188,7 +188,7 @@ class GABoost:
                 matching += r
                 sum_cost += c
 
-            end = time.process_time()
+            end = time.time()
             iteration += 1
             print('Iteration\t%d\truntime\t%.4f\tdcmn\t%d'%(iteration, end - start, -sum_cost))
 
