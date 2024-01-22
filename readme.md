@@ -32,7 +32,7 @@ This is a Python implementation of the paper:
 - scipy==1.11.1
 
 ## Run
-We provide a python file 'runGABoost.py' as well as two executable binary version `runGABoost_mac` and `runGABoost_win.exe` of GABoost for Mac and Windows, respectively. 
+We provide a python file `runGABoost.py` as well as two executable binary version `runGABoost_mac` and `runGABoost_win.exe` of GABoost for Mac and Windows, respectively. 
 There are 8 input arguments for GABoost:
 
   - mode: The code can be run in three mode: `SCMN`, `GABoost`, and `SCMN+GABoost`.
