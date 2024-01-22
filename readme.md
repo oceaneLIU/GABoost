@@ -25,9 +25,14 @@ This is a Python implementation of the paper:
   appears twice in the file, `node_id1  node_id2  edge_type` and `node_id2  node_id1  edge_type` respectively.
   Each line in true_matching file represents a ground-truth alignment node pair. The format is `node_id1  node_id2`.
 
+## Requirements
+
+- networkx==3.1
+- numpy==1.25.2
+- scipy==1.11.1
 
 ## Run
-Currently, we provide two executable binary version `runGABoost_mac` and `runGABoost_win.exe` of GABoost for Mac and Windows, respectively. 
+We provide a python file 'runGABoost.py' as well as two executable binary version `runGABoost_mac` and `runGABoost_win.exe` of GABoost for Mac and Windows, respectively. 
 There are 8 input arguments for GABoost:
 
   - mode: The code can be run in three mode: `SCMN`, `GABoost`, and `SCMN+GABoost`.
@@ -52,6 +57,11 @@ There are 8 input arguments for GABoost:
 ### Running example in `SCMN` mode
 
 - On douban dataset
+
+  runGABoost.py
+  ~~~
+  python runGABoost.py --mode SCMN --input_g0_node ./dataset/douban/left_node_file --input_g0_edge ./dataset/douban/left_edge_file --input_g1_node ./dataset/douban/right_node_file --input_g1_edge ./dataset/douban/right_edge_file --save_output_alignment ./dataset/douban/scmn_output_alignment --ground_truth_alignment ./dataset/douban/true_matching
+  ~~~
   
   Mac
   ~~~
@@ -63,6 +73,11 @@ There are 8 input arguments for GABoost:
   runGABoost_win SCMN ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file None ./dataset/douban/true_matching ./dataset/douban/scmn_output_alignment
   ~~~
 - On movie dataset
+
+  runGABoost.py
+  ~~~
+  python runGABoost.py --mode SCMN --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --save_output_alignment ./dataset/movie/scmn_output_alignment --ground_truth_alignment ./dataset/movie/true_matching
+  ~~~
   
   Mac
   ~~~
@@ -77,6 +92,11 @@ There are 8 input arguments for GABoost:
 ### Running example in `GABoost` mode
 
 - On douban dataset
+
+  runGABoost.py
+  ~~~
+  python runGABoost.py --mode GABoost --input_g0_node ./dataset/douban/left_node_file --input_g0_edge ./dataset/douban/left_edge_file --input_g1_node ./dataset/douban/right_node_file --input_g1_edge ./dataset/douban/right_edge_file --save_output_alignment ./dataset/douban/gaboost_output_alignment --ground_truth_alignment ./dataset/douban/true_matching --input_initial_alignment ./dataset/douban/scmn_output_alignment
+  ~~~
   
   Mac
   ~~~
@@ -88,6 +108,11 @@ There are 8 input arguments for GABoost:
   runGABoost_win GABoost ./dataset/douban/left_node_file ./dataset/douban/left_edge_file ./dataset/douban/right_node_file ./dataset/douban/right_edge_file ./dataset/douban/scmn_output_alignment ./dataset/douban/true_matching ./dataset/douban/gaboost_output_alignment
   ~~~
 - On movie dataset
+  
+  runGABoost.py
+  ~~~
+  python runGABoost.py --mode GABoost --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --save_output_alignment ./dataset/movie/gaboost_output_alignment --ground_truth_alignment ./dataset/movie/true_matching --input_initial_alignment ./dataset/movie/scmn_output_alignment
+  ~~~
   
   Mac
   ~~~
@@ -102,6 +127,11 @@ There are 8 input arguments for GABoost:
 ### Running example in `SCMN+GABoost` mode
 
 - On douban dataset
+
+  runGABoost.py
+  ~~~
+  python runGABoost.py --mode SCMN+GABoost --input_g0_node ./dataset/douban/left_node_file --input_g0_edge ./dataset/douban/left_edge_file --input_g1_node ./dataset/douban/right_node_file --input_g1_edge ./dataset/douban/right_edge_file --save_output_alignment ./dataset/douban/scmn+gaboost_output_alignment --ground_truth_alignment ./dataset/douban/true_matching
+  ~~~
   
   Mac
   ~~~
@@ -114,6 +144,11 @@ There are 8 input arguments for GABoost:
   ~~~
   
 - On movie dataset
+
+  runGABoost.py
+  ~~~
+  python runGABoost.py --mode SCMN+GABoost --input_g0_node ./dataset/movie/left_node_file --input_g0_edge ./dataset/movie/left_edge_file --input_g1_node ./dataset/movie/right_node_file --input_g1_edge ./dataset/movie/right_edge_file --save_output_alignment ./dataset/movie/scmn+gaboost_output_alignment --ground_truth_alignment ./dataset/movie/true_matching
+  ~~~
   
   Mac
   ~~~
@@ -124,3 +159,5 @@ There are 8 input arguments for GABoost:
   ~~~
   runGABoost_win SCMN+GABoost ./dataset/movie/left_node_file ./dataset/movie/left_edge_file ./dataset/movie/right_node_file ./dataset/movie/right_edge_file None ./dataset/movie/true_matching ./dataset/movie/scmn+gaboost_output_alignment
   ~~~
+
+  
