@@ -1,7 +1,8 @@
 import math
 import numpy as np
 from distance import *
-
+from algorithm.SCMN import SCMN
+from algorithm.GABoost import GABoost
 
 def confusion_matrix(aligned_matching, true_matching):
     aligned_set = set()
@@ -23,18 +24,12 @@ def accuracy(aligned_matching, true_matching):
     return acc
 
 
-def mean_average_precision(true_matching, ctx0, ctx1, dis='dcmn'):
+def mean_average_precision(true_matching, g0, g1, dis='dcmn', predict_alignment=None):
     rank_rev = 0
-    if dis == 'dcmn':
-        for v, u in true_matching:
-            mat_dis = dynamic_commonality(ctx0[v], ctx1[u])
-            r = 1
-            for w in ctx1.keys():
-                dis = dynamic_commonality(ctx0[v], ctx1[w])
-                if dis < mat_dis:
-                    r += 1
-            rank_rev += 1/r
-    if dis == 'scmn':
+    if dis == 'SCMN':
+        alg = SCMN(g0, g1)
+        ctx0 = alg.basic_static_node_context(g0)
+        ctx1 = alg.basic_static_node_context(g1)
         for v, u in true_matching:
             mat_dis = static_commonality(ctx0[v], ctx1[u])
             r = 1
@@ -43,6 +38,19 @@ def mean_average_precision(true_matching, ctx0, ctx1, dis='dcmn'):
                 if dis < mat_dis:
                     r += 1
             rank_rev += 1/r
+    else:
+        alg = GABoost(g0, g1, predict_alignment)
+        ctx0 = alg.dynamic_vertex_context(g0, 'left', predict_alignment)
+        ctx1 = alg.dynamic_vertex_context(g1, 'right', predict_alignment)
+        for v, u in true_matching:
+            mat_dis = dynamic_commonality(ctx0[v], ctx1[u])
+            r = 1
+            for w in ctx1.keys():
+                dis = dynamic_commonality(ctx0[v], ctx1[w])
+                if dis < mat_dis:
+                    r += 1
+            rank_rev += 1/r
+
     return rank_rev / len(true_matching)
 
 
